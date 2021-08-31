@@ -1,0 +1,10 @@
+% HW4_#5
+% Written by Thien
+
+syms L1 L2 C3 R4 I I0 Va Vb Vout s
+eqn1 = '-Vout = L1*(s*I - I0)';
+eqn2 = 'Va = L2*s*I';
+eqn3 = 'I = C3*s*(Vb-Va)';
+eqn4 = 'Vout-Vb = R4*I';
+SOL = solve(str2sym(eqn1),str2sym(eqn2),str2sym(eqn3),str2sym(eqn4),I,Va,Vb,Vout);
+SOL.Vout
