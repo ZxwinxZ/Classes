@@ -1,0 +1,16 @@
+%#6
+%Written by Thien
+clear; syms syms L1 L2 C3 R4 R5 R6 I1 I2 I3 I4 I5 I6 I7 I10 I20 Va Va0 Vb Vb0 Vout s
+eqn1 = 'I3=I4';
+eqn2 = 'I5=I6';
+eqn3='I2=I3+I5';
+eqn4='I1=I6+I7+I4';
+eqn5='-Va = L2*(s*I2 - I20)';
+eqn6 = 'I3=C3*((s*Va-Va0)-(s*Vb-Vb0))';
+eqn7 = 'Vb-Vout=I4*R4';
+eqn8 = 'Va = R5*I5';
+eqn9 = '-Vout=R6*I6';
+eqn10 = 'Vout = L1*(s*I1 - I10)';
+SOL=solve(str2sym(eqn1),str2sym(eqn2),str2sym(eqn3),str2sym(eqn4),str2sym(eqn5),str2sym(eqn6),str2sym(eqn7),...
+    str2sym(eqn8),str2sym(eqn9),str2sym(eqn10),I1,I2,I3,I4,I5,I6,I7,Va,Vb,Vout);
+SOL.Vout
