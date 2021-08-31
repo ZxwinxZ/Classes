@@ -1,0 +1,37 @@
+%#6c
+%Written by Thien
+syms syms L1 L2 C3 R4 R5 R6 I1 I2 I3 I4 I5 I6 I7 I8 I10 I20 Va Va0 Vb Vb0 Vs Vout s
+eqn1 = 'I3=I4';
+eqn2 = 'I5=I6';
+eqn3='I2=I3+I5';
+eqn4='I1=I8+I4';
+eqn5='-Va = L2*(s*I2 - I20)';
+eqn6 = 'I3=C3*((s*Va-Va0)-(s*Vb-Vb0))';
+eqn7 = 'Vb-Vout=I4*R4';
+eqn8 = 'Va = R5*I5';
+eqn9 = '-Vs=R6*I6';
+eqn10 = 'Vout = L1*(s*I1 - I10)';
+eqn11 = 'I6+I7 = I8';
+eqn12 = 'Vs - Vout = R8*I8';
+SOL1=solve(str2sym(eqn1),str2sym(eqn2),str2sym(eqn3),str2sym(eqn4),str2sym(eqn5),str2sym(eqn6),str2sym(eqn7),...
+    str2sym(eqn8),str2sym(eqn9),str2sym(eqn10),str2sym(eqn11),str2sym(eqn12),I1,I2,I3,I4,I5,I6,I7,I8,Va,Vb,Vs,Vout);
+Vout = SOL1.Vout
+
+ 
+eqn13 = 'a2 = (L1*L2 + C1*L1*R4*R5 + C3*L1*R5*R8 + C3*L2*R4*R8 + C3*L2*R5*R8)/(C3*l1*L2*R4 + C3*L1*L2*R5 + C3*L1*L2*R6 + C3*L1*L2*R8)';
+eqn14 = 'a1 = (L1*R5 + C3*R4*R5*R8)/(C3*l1*L2*R4 + C3*L1*L2*R5 + C3*L1*L2*R6 + C3*L1*L2*R8)';
+eqn15 = 'a0 = (R5*R8)/(C3*l1*L2*R4 + C3*L1*L2*R5 + C3*L1*L2*R6 + C3*L1*L2*R8)';
+eqn16 = 'q = a1 - (a2^2)/3';
+eqn17 = 'r = a0 + 2*(a2^3)/27 -a2*a1/3';
+eqn18 = 'd = (r^2)/4 + (q^3)/27';
+eqn19 = 'a3 = a2/3 + (-r/2 + sqrt(d))^1/3 - (-r/2 - sqrt(d))^1/3';
+eqn20 = 'a4 = a2 - a3';
+eqn21 = 'w2^2 = a0/a3';
+SOL2=solve(str2sym(eqn13),str2sym(eqn14),str2sym(eqn15),str2sym(eqn16),str2sym(eqn17),str2sym(eqn18),...
+    str2sym(eqn19),str2sym(eqn20),str2sym(eqn21));
+a0 = SOL2.a0
+a1 = SOL2.a1
+a2 = SOL2.a2
+a3 = SOL2.a3
+a4 = SOL2.a4
+w2 = SOL2.w2
